@@ -1,15 +1,15 @@
 import Link from 'next/link';
 
+import Card from 'components/Card.js';
 import { getProduct } from 'service/products.js';
 
 function ProductItem({ product }) {
   return (
     <div>
-      <p>
+      <p className="py-3">
         <Link href="/">Home</Link>
       </p>
-      <h1>{product.id}</h1>
-      <p>{product.name}</p>
+      <Card title={product.name} description={'\u20B9 ' + product.price} />
     </div>
   );
 }
