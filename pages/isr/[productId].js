@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import Link from 'next/link';
 
 import Card from 'components/Card.js';
@@ -17,6 +18,10 @@ function ProductItem({ product }) {
 
   return (
     <div>
+      <Head>
+        <title>ISR - {product.name}</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <p className="py-3">
         <Link href="/">Home</Link>
       </p>
@@ -35,7 +40,8 @@ export async function getStaticProps({ params }) {
     };
 
   return {
-    props: { product, revalidate: 1 }
+    props: { product },
+    revalidate: 1
   };
 }
 

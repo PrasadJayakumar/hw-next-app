@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import Link from 'next/link';
 
 import Card from 'components/Card.js';
@@ -17,6 +18,10 @@ function ProductItem({ product }) {
 
   return (
     <div>
+      <Head>
+        <title>SSG - {product.name}</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <p className="py-3">
         <Link href="/">Home</Link>
       </p>
