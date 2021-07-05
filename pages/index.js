@@ -5,8 +5,9 @@ import { getProducts } from 'service/products.js';
 function Home(props) {
   const { productList } = props;
 
-  const sgEl = [];
   const ssrEl = [];
+  const ssgEl = [];
+  const isrEl = [];
   const csrEl = [];
   productList.forEach((product) => {
     ssrEl.push(
@@ -14,9 +15,14 @@ function Home(props) {
         <Link href={`/ssr/${product.id}`}>{product.name}</Link>
       </li>
     );
-    sgEl.push(
+    ssgEl.push(
       <li key={product.id.toString()} className="py-1">
-        <Link href={`/sg/${product.id}`}>{product.name}</Link>
+        <Link href={`/ssg/${product.id}`}>{product.name}</Link>
+      </li>
+    );
+    isrEl.push(
+      <li key={product.id.toString()} className="py-1">
+        <Link href={`/isr/${product.id}`}>{product.name}</Link>
       </li>
     );
     csrEl.push(
@@ -40,7 +46,8 @@ function Home(props) {
           <thead>
             <tr className="bg-gray-200 text-gray-600 uppercase text-sm h-1">
               <th className="bg-blue-100 border text-center px-8 py-1">SSR</th>
-              <th className="bg-blue-100 border text-center px-8 py-1">SG</th>
+              <th className="bg-blue-100 border text-center px-8 py-1">SSG</th>
+              <th className="bg-blue-100 border text-center px-8 py-1">ISR</th>
               <th className="bg-blue-100 border text-center px-8 py-1">CSR</th>
             </tr>
           </thead>
@@ -50,7 +57,10 @@ function Home(props) {
                 <ul>{ssrEl}</ul>
               </td>
               <td className="border px-8 py-3">
-                <ul>{sgEl}</ul>
+                <ul>{ssgEl}</ul>
+              </td>
+              <td className="border px-8 py-3">
+                <ul>{isrEl}</ul>
               </td>
               <td className="border px-8 py-3">
                 <ul>{csrEl}</ul>
