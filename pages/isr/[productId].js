@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 import Card from 'components/Card.js';
-import { getProductIds, getProduct } from 'service/products.js';
+import { getProductsId, getProduct } from 'service/products.js';
 
 function ProductItem({ product }) {
   const router = useRouter();
@@ -25,14 +25,18 @@ function ProductItem({ product }) {
       <p className="py-3">
         <Link href="/">Home</Link>
       </p>
-      <Card title={product.name} description={'\u20B9 ' + product.price} />
+      <Card
+        title={product.name}
+        subtitle={' by ' + product.author}
+        description={'\u20B9 ' + product.price}
+      />
     </div>
   );
 }
 
 // Static Generation: Fetch data at build time.
 export async function getStaticProps({ params }) {
-  let product = getProduct(params.productId);
+  let product = await getProduct(params.productId);
 
   if (!product)
     return {
@@ -47,10 +51,10 @@ export async function getStaticProps({ params }) {
 
 // Static Generation: Specify dynamic routes to pre-render pages based on data.
 export async function getStaticPaths() {
-  let data = getProductIds();
+  let data = await getProductsId();
 
-  const paths = data.map((productId) => ({
-    params: { productId: productId.toString() }
+  const paths = data.map((product) => ({
+    params: { productId: product.id.toString() }
   }));
 
   return { paths, fallback: true };

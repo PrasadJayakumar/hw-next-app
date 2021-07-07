@@ -12,6 +12,8 @@ function ProductItem() {
 
   let [product, setProduct] = useState(null);
   useEffect(() => {
+    if (!productId) return;
+
     axios
       .get(`/api/products/${productId}`)
       .then((resp) => {
@@ -38,7 +40,11 @@ function ProductItem() {
       <p className="py-3">
         <Link href="/">Home</Link>
       </p>
-      <Card title={product.name} description={'\u20B9 ' + product.price} />
+      <Card
+        title={product.name}
+        subtitle={' by ' + product.author}
+        description={'\u20B9 ' + product.price}
+      />
     </div>
   );
 }

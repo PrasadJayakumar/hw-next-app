@@ -76,7 +76,7 @@ function Home(props) {
 // Static Generation: Fetch data at build time
 export async function getStaticProps(context) {
   return {
-    props: { productList: getProducts() }
+    props: { productList: await getProducts() }
   };
 }
 

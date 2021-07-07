@@ -1,31 +1,41 @@
-import data from './products.json';
+import axios from 'axios';
 
-let allProducts = data;
-
-// For demo purpose - Change the price randomly every 15 seconds
-setInterval(() => {
-  allProducts = allProducts.map((product) => {
-    return {
-      ...product,
-      price: Math.floor(Math.random() * 200) + 100
-    };
+async function hasuraApi(relPath) {
+  const resp = await axios.get(`${process.env.API_BASE_URL}${relPath}`, {
+    headers: {
+      'x-hasura-admin-secret': process.env.API_SECRET_KEY
+    }
   });
-}, 15000);
-
-export function getProduct(productId) {
-  let result = allProducts.filter((p) => p.id === parseInt(productId));
-  if (result.length >= 1) return result[0];
-  else return null;
+  return resp.data;
 }
 
-// Fetch all products
-export function getProducts() {
-  const products = allProducts;
-  return products;
+export async function getProduct(productId) {
+  try {
+    let resp = await hasuraApi(`/api/rest/books/${productId}`);
+    if (resp.books_by_pk) return resp.books_by_pk;
+  } catch (err) {
+    console.error(err);
+  }
+  return null;
 }
 
-// Fetch only first 2000 products
-export function getProductIds() {
-  const productIds = allProducts.filter((p) => p.id <= 2000).map((p) => p.id);
-  return productIds;
+export async function getProducts() {
+  try {
+    let resp = await hasuraApi(`/api/rest/books`);
+    return resp.books;
+  } catch (err) {
+    console.error(err);
+  }
+  return [];
+}
+
+// Fetch partial set of products
+export async function getProductsId() {
+  try {
+    let resp = await hasuraApi(`/api/rest/books-id`);
+    if (resp.books) return resp.books;
+  } catch (err) {
+    console.error(err);
+  }
+  return null;
 }

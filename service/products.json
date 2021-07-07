@@ -1,5 +1,20 @@
 [
-  { "id": 1001, "name": "Book A", "price": 100 },
-  { "id": 1002, "name": "Book B", "price": 100 },
-  { "id": 2001, "name": "Book C", "price": 100 }
+  {
+    "id": 1001,
+    "name": "The Lord of the Rings",
+    "author": "J.R.R. Tolkien",
+    "price": 500
+  },
+  {
+    "id": 1002,
+    "name": "A Song of Ice and Fire",
+    "author": "George R.R. Martin",
+    "price": 500
+  },
+  {
+    "id": 2001,
+    "name": "Animal Farm",
+    "author": "George Orwell",
+    "price": 500
+  }
 ]

@@ -14,7 +14,11 @@ function ProductItem({ product }) {
       <p className="py-3">
         <Link href="/">Home</Link>
       </p>
-      <Card title={product.name} description={'\u20B9 ' + product.price} />
+      <Card
+        title={product.name}
+        subtitle={' by ' + product.author}
+        description={'\u20B9 ' + product.price}
+      />
     </div>
   );
 }
@@ -22,7 +26,7 @@ function ProductItem({ product }) {
 // Server-side Rendering: Fetch data on each request
 export async function getServerSideProps({ query }) {
   const { productId } = query;
-  let product = getProduct(productId);
+  let product = await getProduct(productId);
 
   if (!product)
     return {
