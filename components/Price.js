@@ -5,7 +5,6 @@ function Price({ productId, originalPrice }) {
   let [product, setProduct] = useState(null);
 
   useEffect(() => {
-    console.log('checkme >>>', productId, originalPrice);
     if (!productId) return;
 
     axios

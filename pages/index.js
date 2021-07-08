@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import { getProducts } from 'service/products.js';
 
 function Home(props) {
@@ -12,22 +10,30 @@ function Home(props) {
   productList.forEach((product) => {
     ssrEl.push(
       <li key={product.id.toString()} className="py-1">
-        <Link href={`/ssr/${product.id}`}>{product.name}</Link>
+        <a href={`/ssr/${product.id}`} target="rendering_frame">
+          {product.name}
+        </a>
       </li>
     );
     ssgEl.push(
       <li key={product.id.toString()} className="py-1">
-        <Link href={`/ssg-dynamic/${product.id}`}>{product.name}</Link>
+        <a href={`/ssg-dynamic/${product.id}`} target="rendering_frame">
+          {product.name}
+        </a>
       </li>
     );
     isrEl.push(
       <li key={product.id.toString()} className="py-1">
-        <Link href={`/isr/${product.id}`}>{product.name}</Link>
+        <a href={`/isr/${product.id}`} target="rendering_frame">
+          {product.name}
+        </a>
       </li>
     );
     csrEl.push(
       <li key={product.id.toString()} className="py-1">
-        <Link href={`/csr/${product.id}`}>{product.name}</Link>
+        <a href={`/csr/${product.id}`} target="rendering_frame">
+          {product.name}
+        </a>
       </li>
     );
   });
@@ -40,34 +46,41 @@ function Home(props) {
     );
   } else {
     return (
-      <div>
-        <p className="font-bold text-xl mb-2 py-3">Products</p>
-        <table id="products" className="shadow-lg bg-white">
-          <thead>
-            <tr className="bg-gray-200 text-gray-600 uppercase text-sm h-1">
-              <th className="bg-blue-100 border text-center px-8 py-1">SSR</th>
-              <th className="bg-blue-100 border text-center px-8 py-1">SSG</th>
-              <th className="bg-blue-100 border text-center px-8 py-1">ISR</th>
-              <th className="bg-blue-100 border text-center px-8 py-1">CSR</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className="border px-8 py-3">
-                <ul>{ssrEl}</ul>
-              </td>
-              <td className="border px-8 py-3">
-                <ul>{ssgEl}</ul>
-              </td>
-              <td className="border px-8 py-3">
-                <ul>{isrEl}</ul>
-              </td>
-              <td className="border px-8 py-3">
-                <ul>{csrEl}</ul>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div className="grid grid-cols-3 gap-4">
+        <div className="shadow-lg bg-white p-4">
+          <p className="font-bold text-xl mb-2 py-3">Products</p>
+
+          <div>
+            <p className="font-bold bg-blue-100 border text-center px-8 py-1">
+              SSR
+            </p>
+            <ul>{ssrEl}</ul>
+          </div>
+
+          <div>
+            <p className="font-bold bg-blue-100 border text-center px-8 py-1">
+              SSG
+            </p>
+            <ul>{ssgEl}</ul>
+          </div>
+
+          <div>
+            <p className="font-bold bg-blue-100 border text-center px-8 py-1">
+              ISR
+            </p>
+            <ul>{isrEl}</ul>
+          </div>
+
+          <div>
+            <p className="font-bold bg-blue-100 border text-center px-8 py-1">
+              CSR
+            </p>
+            <ul>{csrEl}</ul>
+          </div>
+        </div>
+        {/* <div className="col-span-2">
+          <iframe name="rendering_frame" frameBorder="0" width="600px" />
+        </div> */}
       </div>
     );
   }
