@@ -42,7 +42,7 @@ function ProductItem() {
       </p>
       <Card
         title={product.name}
-        subtitle={' by ' + product.author}
+        subtitle={' by ' + product.authors}
         description={'\u20B9 ' + product.price}
       />
     </div>
