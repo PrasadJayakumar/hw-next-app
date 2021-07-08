@@ -57,7 +57,7 @@ export async function getStaticPaths() {
     params: { productId: product.id.toString() }
   }));
 
-  return { paths, fallback: true };
+  return { paths, fallback: 'blocking' };
 }
 
 export default ProductItem;
