@@ -17,7 +17,7 @@ function Home(props) {
     );
     ssgEl.push(
       <li key={product.id.toString()} className="py-1">
-        <Link href={`/ssg/${product.id}`}>{product.name}</Link>
+        <Link href={`/ssg-dynamic/${product.id}`}>{product.name}</Link>
       </li>
     );
     isrEl.push(
